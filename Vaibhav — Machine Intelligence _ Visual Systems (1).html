@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vaibhav — Machine Intelligence / Visual Systems</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#0a0a0a;--fg:#ececec;--mut:#7d7d7d;--line:#242424;--acc:#f5c400;--red:#ff3b30;--pan:#111}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4f4f2;--fg:#111;--mut:#777;--line:#d8d8d4;--acc:#b58900;--pan:#fff}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:56px}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 "Helvetica Neue",Helvetica,Arial,sans-serif;overflow-x:hidden}
+.m{font:11px/1.4 ui-monospace,"SF Mono",Menlo,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:20;display:flex;gap:18px;padding:14px 24px;background:linear-gradient(var(--bg),transparent);overflow-x:auto;white-space:nowrap}
+nav a{color:var(--mut);text-decoration:none}nav a:hover{color:var(--fg)}
+section{padding:110px 24px 70px;max-width:1180px;margin:0 auto;position:relative}
+h2{font-size:clamp(34px,6vw,76px);font-weight:500;letter-spacing:-.03em;line-height:1;margin:8px 0 28px}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:48px;max-width:none}
+#hc{position:absolute;inset:0;width:100%;height:100%}
+.hi{position:relative;max-width:1180px;margin:0 auto;width:100%;pointer-events:none}
+.hi *{pointer-events:auto}
+h1{font-size:clamp(56px,15vw,210px);font-weight:500;letter-spacing:-.06em;line-height:.85;margin:10px 0}
+.btn{display:inline-block;border:1px solid var(--fg);color:var(--fg);background:none;padding:11px 18px;margin:18px 10px 0 0;text-decoration:none;cursor:pointer;font:inherit}
+.btn:hover{background:var(--fg);color:var(--bg)}
+.st{display:flex;gap:28px;flex-wrap:wrap;margin-top:34px}.st i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--acc);margin-right:8px;animation:bl 1.6s infinite}
+@keyframes bl{50%{opacity:.2}}
+.rv{opacity:0;transform:translateY(24px);transition:.8s}.rv.in{opacity:1;transform:none}
+.lead{font-size:clamp(20px,3vw,34px);letter-spacing:-.02em;max-width:900px;line-height:1.25}
+.tl{border-left:1px solid var(--line);margin:30px 0 0 6px;padding-left:28px}
+.tl div{position:relative;padding-bottom:34px}.tl div:before{content:"";position:absolute;left:-33px;top:6px;width:9px;height:9px;background:var(--bg);border:1px solid var(--fg)}
+.tl b{display:block;font-weight:500;font-size:20px}
+.lab{display:grid;grid-template-columns:230px 1fr;gap:28px;border-top:1px solid var(--line);padding-top:20px}
+#tabs{display:flex;flex-direction:column}
+#tabs button{text-align:left;background:none;border:0;border-bottom:1px solid var(--line);color:var(--mut);padding:11px 0;cursor:pointer;font:inherit}
+#tabs button b{font:11px ui-monospace,monospace;margin-right:10px}#tabs button.on,#tabs button:hover{color:var(--fg)}#tabs button.on b{color:var(--acc)}
+.stage{position:relative;background:#050505;border:1px solid var(--line);aspect-ratio:16/9;overflow:hidden;color:#ececec}
+#cv{width:100%;height:100%;display:block}
+#dom{position:absolute;inset:0;padding:14px;overflow:auto;font-size:13px}
+.ctl{display:flex;gap:12px;align-items:center;margin:10px 0 18px}.ctl input{flex:1;accent-color:var(--acc)}
+.ctl button{background:none;border:1px solid var(--line);color:var(--fg);padding:4px 10px;cursor:pointer;font:11px ui-monospace,monospace}
+h3{font-size:clamp(28px,4vw,48px);font-weight:500;letter-spacing:-.03em;margin:0 0 4px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}.flow span{border:1px solid var(--line);padding:4px 9px;color:var(--mut)}
+details{border-bottom:1px solid var(--line);padding:10px 0}summary{cursor:pointer;color:var(--mut)}summary:hover{color:var(--fg)}details p{margin:8px 0 2px;max-width:680px}
+svg .rg{cursor:crosshair;transition:.2s}svg .rg:hover,svg .rg.h{fill:var(--acc);stroke:var(--acc)}
+.ch{margin-top:8px}.ch div{opacity:0;animation:up .5s forwards;animation-delay:calc(var(--i)*.15s);border-left:1px solid var(--acc);padding-left:8px;margin:3px 0}
+@keyframes up{to{opacity:1}}
+.ev button{margin:8px 6px 0 0;background:none;border:1px solid #444;color:#ececec;padding:6px 12px;cursor:pointer;font:11px ui-monospace,monospace}.ev button:hover{border-color:var(--acc);color:var(--acc)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+.two div{background:var(--bg);padding:18px;transition:.3s}.two div:hover{background:var(--pan)}.two .h{grid-column:1/-1;display:flex;justify-content:space-between}
+.cap{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.cap button{background:var(--bg);border:0;color:var(--fg);text-align:left;padding:22px 16px;font:inherit;cursor:pointer;min-height:84px}.cap button.on,.cap button:hover{background:var(--pan);color:var(--acc)}
+#cd{margin-top:18px;min-height:56px;max-width:700px;font-size:20px;letter-spacing:-.01em}
+#fab{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:30;width:54px;height:54px;border-radius:50%;background:var(--bg);border:1px solid var(--fg);color:var(--fg);cursor:pointer;font:10px ui-monospace,monospace}
+#fab:after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid var(--acc);animation:pu 2.4s infinite}
+@keyframes pu{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.3);opacity:0}}
+#ai{position:fixed;right:20px;bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:30;width:min(420px,calc(100vw - 40px));height:min(560px,70vh);background:#070707;color:#e8e8e8;border:1px solid #333;display:none;flex-direction:column;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace}
+#ai.open{display:flex}.ah{padding:11px 14px;border-bottom:1px solid #2a2a2a;display:flex;justify-content:space-between;color:#aaa;font-size:11px;letter-spacing:.1em}.ah i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--acc);margin-right:6px;animation:bl 1.6s infinite}
+#log{flex:1;overflow:auto;padding:14px}#log p{margin:0 0 14px;white-space:pre-wrap}.u{color:#888}.u:before{content:"> "}
+#log button{display:block;margin-top:6px;background:none;border:1px solid var(--acc);color:var(--acc);padding:4px 9px;cursor:pointer;font:inherit;font-size:11px}
+.sg{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 8px}.sg button{background:none;border:1px solid #333;color:#999;padding:3px 8px;cursor:pointer;font:10px ui-monospace,monospace}.sg button:hover{color:var(--acc);border-color:var(--acc)}
+.af{display:flex;border-top:1px solid #2a2a2a}.af input{flex:1;min-width:0;background:none;border:0;color:#e8e8e8;padding:12px 14px;font:inherit;outline:0}.af button{background:none;border:0;color:var(--acc);padding:0 14px;cursor:pointer;font:inherit}
+#dg{position:fixed;left:20px;bottom:20px;z-index:40;background:#000;color:#0f0;border:1px solid #0f0;padding:12px;display:none;font:11px/1.6 ui-monospace,monospace;white-space:pre}
+body.diag #dg{display:block}body.diag section{outline:1px dashed rgba(0,255,0,.35)}
+@media(max-width:760px){.lab{grid-template-columns:1fr}#tabs{flex-direction:row;overflow-x:auto}#tabs button{white-space:nowrap;padding-right:16px;border:0}section{padding-top:90px}.two{grid-template-columns:1fr}.stage{aspect-ratio:4/3}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style></head><body>
+<nav class="m"><a href="#hero">01 Intro</a><a href="#exp">02 Experience</a><a href="#work">03 Work</a><a href="#design">04 Visual Systems</a><a href="#cap">05 Capabilities</a><a href="#contact">06 Contact</a></nav>
+
+<section id="hero"><canvas id="hc"></canvas><div class="hi">
+<div class="m">01 / Introduction</div><h1>VAIBHAV</h1>
+<div class="m" style="color:var(--fg)">AI / Machine Intelligence / Visual Systems</div>
+<p class="lead" style="margin-top:18px">Working at the interface of machine perception, human intelligence and visual systems.</p>
+<a class="btn m" href="#work" style="color:var(--fg)">Explore work</a><a class="btn m" href="#about" style="color:var(--fg)">About</a>
+<div class="st m"><span><i></i>System / Online</span><span>4 Years / AI × ML</span><span>Multimodal / Active</span></div></div></section>
+
+<section id="about"><div class="m">Narrative</div><p class="lead rv">I work at the boundary between machine perception and human judgment—where ambiguous visual information becomes structured intelligence.</p>
+<p class="rv" style="max-width:640px;color:var(--mut)">Four years across AI/ML data operations: computer vision, multimodal workflows, human-in-the-loop systems and model evaluation, alongside a practice in visual design. My work is the human side of the loop: interpreting, structuring and validating the signals models learn from.</p></section>
+
+<section id="exp"><div class="m">02 / Experience</div><h2>Timeline</h2>
+<div class="tl"><div class="rv"><span class="m">2021</span><b>Begin</b></div>
+<div class="rv"><span class="m">2021 – 2025</span><b>AI / ML Data Operations</b>Google-associated projects</div>
+<div class="rv"><span class="m">Domain</span><b>Computer Vision</b></div><div class="rv"><span class="m">Domain</span><b>Multimodal AI</b></div>
+<div class="rv"><span class="m">Domain</span><b>LLM / Model Evaluation</b></div><div class="rv"><span class="m">Domain</span><b>Video Intelligence</b></div><div class="rv"><span class="m">Domain</span><b>Embodied AI</b></div></div></section>
+
+<section id="work"><div class="m">03 / Case studies</div><h2>The lab</h2>
+<div class="lab"><div id="tabs"></div><div>
+<div class="stage"><canvas id="cv"></canvas><div id="dom" hidden></div></div>
+<div class="ctl m"><button id="pl">Play</button><input id="sc" type="range" min="0" max="1000" value="0" aria-label="Timeline scrub"><span id="nt"></span></div>
+<h3 id="pt"></h3><div class="m" id="pd"></div><div class="flow m" id="pf"></div><div id="pb"></div></div></div></section>
+
+<section id="design"><div class="m">04 / Visual Systems</div><h2>Two kinds of perception</h2>
+<p class="lead rv">Machine perception and human perception both turn marks into meaning.</p>
+<div class="two m"><div class="h"><span>Machine perception</span><span>Human perception</span></div>
+<div>Sign — pixels, edges</div><div>Sign — mark, glyph, form</div><div>Structure — regions, geometry</div><div>Structure — grid, hierarchy</div>
+<div>Representation — labels, keypoints</div><div>Representation — logo, composition</div><div>Interpretation — grounded answer</div><div>Interpretation — brand meaning</div></div>
+<p class="m" style="margin-top:22px">Adobe Illustrator · Logo systems · Typography · 2D visual design · Brand identity · Graphic composition · Art direction · Visual semiotics</p></section>
+
+<section id="cap"><div class="m">05 / Capabilities</div><h2>Matrix</h2><div class="cap" id="cm"></div><div id="cd" class="rv"></div></section>
+
+<section id="contact"><div class="m">06 / Contact</div><h2>Open a channel</h2>
+<p class="lead">Open to conversations about AI, ML data systems and visual design.</p><button class="btn m" id="oa" style="color:var(--fg)">Ask the assistant</button></section>
+
+<button id="fab" aria-label="Open Portfolio Intelligence">V.A.I.</button>
+<div id="ai" role="dialog" aria-label="Portfolio Intelligence"><div class="ah"><span><i></i>PORTFOLIO INTELLIGENCE</span><span id="as">ONLINE</span></div>
+<div id="log"><p>Ask about projects, contribution, domains or design. I answer only from verified portfolio content.</p></div>
+<div class="sg" id="sg"></div><div class="af"><input id="ti" placeholder="query…" aria-label="Question"><button id="ts">SEND</button></div></div>
+<div id="dg"></div>
+
+<script>
+const $=s=>document.querySelector(s),cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),ea=v=>v*v*(3-2*v),lp=(a,b,v)=>a+(b-a)*v;
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const P=[
+{id:'pose',t:'Embody Joint',d:'Computer vision · Human pose · Embodied AI',fl:['Image / video','Human detection','Joint localization','Skeleton','Spatial relations','Motion'],
+ x:{Context:'Human-pose workflows where people in images and video are described as joints and skeletons.',Problem:'Raw pixels of a body are not machine-readable. Models need consistent keypoints, even with occlusion and unusual angles.',Contribution:'Contributed to joint-level visual interpretation: placing and checking keypoints and resolving ambiguous or occluded cases.','ML concept':'Keypoint localization, skeletal representation, spatial relations, temporal state.',Challenges:'Occlusion, unusual poses, left/right ambiguity.','Why it matters':'Pose is how machines begin to understand movement and action.','Key insight':'A skeleton is a decision about what matters in a body.'},n:'Conceptual visualization.'},
+{id:'identity',t:'Video Verifying Identity',d:'Computer vision · Video understanding · Identity',fl:['Video scene','Person detection','Bounding box','Tracking','Frame progression','Temporal consistency'],
+ x:{Context:'Video workflows where the same person must be recognised as the same subject across frames.',Problem:'A subject changes pose, scale and lighting while moving. Visual consistency has to be judged frame to frame.',Contribution:'Contributed to reviewing visual consistency of subjects across video frames and flagging ambiguous cases.','ML concept':'Detection, tracking, temporal consistency.',Challenges:'Motion blur, partial views, similar-looking subjects.','Why it matters':'Reliable tracking is the base layer of any video understanding.','Key insight':'Identity over time is a visual continuity problem.'},n:'Conceptual visualization of the computer-vision workflow. Not verification software.'},
+{id:'road',t:'Road Mapping',d:'Computer vision · Spatial mapping',fl:['Raw road video','Lane detection','Lane tracking','Trajectory','Drift state','Structured map'],
+ x:{Context:'Road imagery turned into structured spatial information.',Problem:'A driver-view video is unstructured. Lanes, edges, intersections and objects must become a map.',Contribution:'Contributed to visual interpretation of road scenes: lanes, boundaries, intersections and traffic objects.','ML concept':'Lane and boundary detection, road geometry, spatial state.',Challenges:'Faded markings, occlusion by vehicles, complex intersections.','Why it matters':'Maps are how perception becomes reusable knowledge.','Key insight':'Unstructured visual world → machine-readable map.'},n:'Conceptual visualization. Not an autonomous-driving system.'},
+{id:'grounding',t:'Dense Structured Grounding',d:'Multimodal AI · Vision-language · Visual grounding',fl:['Visual region','Object','Spatial relation','Semantics','Grounded answer','—'],
+ x:{Context:'Charts, tables and infographics where answers must point to exact regions.',Problem:'Reading text is not enough. A model must connect words to the right place in a dense visual.',Contribution:'Contributed to region-level visual interpretation and checking that answers are grounded in the right element.','ML concept':'Visual grounding, vision-language alignment.',Challenges:'Dense layouts, small elements, legend and axis dependencies.','Why it matters':'Grounding separates seeing from guessing.','Key insight':'An answer is only as good as the region it points to.'},n:'Hover the chart. Data is illustrative.'},
+{id:'llm',t:'Model Evaluation & Alignment Workflows',d:'Foundation model development · Human feedback',fl:['Raw input','Model response','Evaluation','Error detection','Human feedback','Training signal'],
+ x:{Context:'Human-in-the-loop evaluation of language-model responses.',Problem:'Fluent output can still be wrong. Quality needs structured judgment.',Contribution:'Contributed to evaluating responses for instruction following, quality and hallucination, and giving feedback used as training signal.','ML concept':'Preference evaluation, error taxonomy, human feedback.',Challenges:'Subtle errors, ambiguous instructions, consistent judgment.','Why it matters':'Evaluation is how models are corrected.','Key insight':'Judgment, structured, becomes signal.'},n:'Interactive conceptual example.'},
+{id:'video',t:'Video RL / Video Understanding',d:'Video intelligence · Tracking · Temporal context',fl:['Frame','Target detection','Tracking','Motion','Temporal context','Event understanding'],
+ x:{Context:'Video sequences where one target is followed through motion.',Problem:'A single frame has no motion. Meaning appears across frames.',Contribution:'Contributed to frame-level interpretation of targets and motion in video sequences.','ML concept':'Tracking, motion, temporal context.',Challenges:'Crowded scenes, fast motion, overlap.','Why it matters':'Events are sequences, not frames.','Key insight':'Time turns detection into understanding.'},n:'Conceptual visualization.'},
+{id:'robot',t:'Embodied / Robotic AI',d:'Embodied AI · Perception → planning → action',fl:['Observe object','Identify','Grasp planning','Action','Transfer','Release'],
+ x:{Context:'Data workflows around machines that see, plan and act.',Problem:'Action needs perception first. Objects and grasp points must be described precisely.',Contribution:'Contributed to visual-data interpretation used in embodied-AI data workflows.','ML concept':'Perception, planning, action.',Challenges:'Object ambiguity, viewpoint, grasp choices.','Why it matters':'Embodiment closes the loop from seeing to doing.','Key insight':'Perception only matters when it changes action.'},n:'Conceptual visualization of embodied-AI data workflows. Not a deployed robotic system.'}];
+const CAP={'AI / ML':'Working across data and evaluation workflows that sit behind machine-learning systems.','Computer Vision':'Interpreting images and video as structured visual signals.','Multimodal AI':'Linking visual regions with language and meaning.','Foundation Models':'Contributing human feedback inside model-development workflows.','Human-in-the-Loop AI':'Where human judgment corrects and trains machine output.','Model Evaluation':'Instruction following, response quality, hallucination detection, preference evaluation.','Data Intelligence':'Turning messy real-world data into structured, quality-controlled signals.','Video Understanding':'Tracking, motion and temporal context across frames.','Embodied AI':'Perception, planning and action data workflows.','Visual Design':'Adobe Illustrator, 2D design, compositions, brand identity.','Art Direction':'Setting a coherent visual language across a body of work.','Typography':'Hierarchy, rhythm and voice through type.'};
+
+const cv=$('#cv'),cx=cv.getContext('2d');cv.width=1280;cv.height=720;
+const C='#ececec',M='#777',A='#f5c400',R='#ff3b30';
+const bg=(c,f)=>{c.fillStyle=f||'#050505';c.fillRect(0,0,640,360)};
+const tx=(c,s,x,y,col)=>{c.fillStyle=col||M;c.font='9px monospace';c.fillText(s,x,y)};
+const bx=(c,x,y,w,h,col,l)=>{c.strokeStyle=col;c.lineWidth=1.5;c.strokeRect(x,y,w,h);if(l)tx(c,l,x,y-4,col)};
+const ln=(c,a,b,col,w,d)=>{c.strokeStyle=col;c.lineWidth=w||1;c.setLineDash(d||[]);c.beginPath();c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);c.stroke();c.setLineDash([])};
+const dot=(c,x,y,r,col)=>{c.fillStyle=col;c.beginPath();c.arc(x,y,r,0,7);c.fill()};
+const B=[['neck','head'],['lsh','rsh'],['neck','lsh'],['neck','rsh'],['lsh','lel'],['lel','lwr'],['rsh','rel'],['rel','rwr'],['lsh','lhp'],['rsh','rhp'],['lhp','rhp'],['lhp','lkn'],['lkn','lan'],['rhp','rkn'],['rkn','ran']];
+const SIM=[];
+SIM[0]=(c,t)=>{bg(c);c.strokeStyle='#121212';c.lineWidth=1;for(let i=0;i<640;i+=40){ln(c,[i,0],[i,360],'#121212')}for(let j=0;j<360;j+=40)ln(c,[0,j],[640,j],'#121212');
+const w=Math.sin(t*25)*.03,s=300,X=320,Y=190,J={head:[0,-.38],neck:[0,-.29],lsh:[-.08,-.27],rsh:[.08,-.27],lel:[-.12,-.15+w],rel:[.12,-.15-w],lwr:[-.13+w,-.03],rwr:[.13-w,-.03],lhp:[-.05,0],rhp:[.05,0],lkn:[-.06+w,.17],rkn:[.06-w,.17],lan:[-.06,.36],ran:[.06,.36]};
+const K=Object.keys(J),p=k=>[X+J[k][0]*s,Y+J[k][1]*s];c.lineCap='round';
+B.forEach(b=>ln(c,p(b[0]),p(b[1]),'#1c1c1c',18));dot(c,...p('head'),22,'#1c1c1c');
+c.globalAlpha=cl((t-.5)/.15);B.forEach(b=>ln(c,p(b[0]),p(b[1]),C,1.5));c.globalAlpha=1;
+const n=Math.floor(cl((t-.2)/.3)*K.length);
+K.slice(0,n).forEach(k=>{const[x,y]=p(k),o=k=='rwr'&&t>.6&&t<.72;if(o){c.strokeStyle=R;c.setLineDash([3,3]);c.beginPath();c.arc(x,y,7,0,7);c.stroke();c.setLineDash([]);tx(c,'OCCLUSION',x+12,y,R)}else dot(c,x,y,3.5,A)});
+if(t>.75){const h=p('head'),e=p('lel'),q=p('rhp'),a=p('lkn');[['KEYPOINT',h,[h[0]+110,h[1]-8]],['CONFIDENCE',e,[e[0]-130,e[1]]],['SPATIAL RELATION',q,[q[0]+110,q[1]]],['TEMPORAL STATE T+'+Math.floor(t*100),a,[a[0]-130,a[1]+10]]].forEach(l=>{ln(c,l[1],l[2],M,.7);tx(c,l[0],l[2][0]>l[1][0]?l[2][0]+4:l[2][0]-96,l[2][1]+3,C)})}};
+SIM[1]=(c,t)=>{bg(c,'#0b0d0b');c.fillStyle='#0f110f';c.fillRect(0,170,640,190);for(let i=0;i<9;i++)ln(c,[40+i*75,170],[40+i*75,120+(i%3)*14],'#1a221a',6);
+const x=lp(110,520,t),y=262+Math.sin(t*50)*2;ln(c,[x,y-38],[x,y],'#aaa',5);dot(c,x,y-48,8,'#aaa');ln(c,[x,y],[x-8+Math.sin(t*50)*9,y+28],'#aaa',3);ln(c,[x,y],[x+8-Math.sin(t*50)*9,y+28],'#aaa',3);
+if(t>.15){const d=cl((t-.15)/.1);c.globalAlpha=d;bx(c,x-24,y-66,48,100,A,'ID 07 · PERSON');for(let k=1;k<6;k++)dot(c,x-k*16,y+30,2,A);c.globalAlpha=1}
+const a=Math.min(4,Math.floor(t*5));for(let i=0;i<5;i++){const X=30+i*120;c.strokeStyle=i==a?A:'#333';c.lineWidth=1;c.strokeRect(X,298,100,48);tx(c,'FRAME 00'+(i+1),X+4,309,i==a?A:M);const px=X+10+(lp(110,520,(i+.5)/5)-110)/410*80;dot(c,px,330,3,i<=a?A:'#333');if(i<4)ln(c,[X+100,322],[X+120,322],i<a?A:'#333',1)}
+if(t>.6)tx(c,'TEMPORAL CONSISTENCY: MAINTAINED',210,288,A)};
+SIM[2]=(c,t)=>{bg(c);const vx=320,vy=140,off=ea(cl((t-.35)/.2))*(1-ea(cl((t-.65)/.15)))*100,dr=off>55,col=dr?R:A,xb=[-60+off,230+off,610+off],pt=(b,q)=>[vx+(b-vx)*q,vy+220*q];
+c.fillStyle='#0d0d0d';c.beginPath();c.moveTo(vx,vy);c.lineTo(xb[0]+90,360);c.lineTo(xb[2]+90,360);c.fill();
+const e=[[xb[0]+90,360],[xb[2]+90,360]],cb=[xb[1]+90-90+0,360];
+const E0=xb[0]+90,E1=xb[2]+90,Cc=xb[1]+90;
+c.fillStyle=dr?'rgba(255,59,48,.18)':'rgba(245,196,0,.1)';c.beginPath();c.moveTo(vx,vy);c.lineTo(Cc,360);c.lineTo(E1,360);c.fill();
+ln(c,[vx,vy],[E0,360],'#888',2);ln(c,[vx,vy],[E1,360],'#888',2);
+const ph=(t*6)%1;for(let k=0;k<14;k++){const q0=Math.pow((k+ph)/14,2),q1=Math.pow((k+ph+.5)/14,2);ln(c,pt(Cc,q0),pt(Cc,q1),col,2.5)}
+const ip=cl((t-.08)*1.5);if(ip>0&&ip<1){const y=vy+220*ip*ip;c.fillStyle='#161616';c.fillRect(vx+(E0-vx)*ip*ip*0+ (vx+(E0-vx)*ip)-0,y,(E1-E0)*ip,6*ip+1);tx(c,'INTERSECTION',vx+(E1-vx)*ip-80,y-4,C)}
+const vp=pt((Cc+E1)/2,.45);bx(c,vp[0]-28,vp[1]-18,56,30,C,'VEHICLE');
+c.strokeStyle='#fff';c.lineWidth=1.5;c.setLineDash([5,5]);c.beginPath();c.moveTo(320,360);c.quadraticCurveTo(320-off*.3,250,vx-off*.5,vy+30);c.stroke();c.setLineDash([]);
+tx(c,'LANE DETECTED',20,60,col);tx(c,'ROAD GEOMETRY',20,74,M);tx(c,'BOUNDARY',E0+14,300,M);tx(c,'TRAJECTORY',300,238,C);tx(c,'SPATIAL STATE: '+(dr?'LANE DEPARTURE':'IN LANE'),20,88,col);
+const a=ea(cl((t-.82)/.1));if(a>0){c.globalAlpha=a;bg(c,'#050505');c.fillStyle='#101010';c.fillRect(230,40,180,290);[230,320,410].forEach((x,i)=>ln(c,[x,40],[x,330],i==1?A:'#888',i==1?2:1,i==1?[8,6]:[]));bx(c,300,240,40,60,C,'EGO');ln(c,[320,240],[320,120],C,1,[4,4]);dot(c,320,120,4,A);bx(c,325,90,32,40,M,'OBJECT');ln(c,[230,150],[410,150],M,1,[3,3]);tx(c,'INTERSECTION NODE',416,153,M);tx(c,'LANE A',250,60,M);tx(c,'LANE B',340,60,M);tx(c,'STRUCTURED ROAD REPRESENTATION',20,340,A);c.globalAlpha=1}};
+SIM[5]=(c,t)=>{bg(c,'#120e08');c.strokeStyle='#3a3326';c.lineWidth=1.5;c.strokeRect(40,40,560,280);ln(c,[320,40],[320,320],'#3a3326');c.beginPath();c.arc(320,180,40,0,7);c.stroke();c.strokeRect(40,120,90,120);c.strokeRect(510,120,90,120);
+const Q=(i,u)=>[320+200*Math.sin(u*6.28+i*1.7),180+105*Math.cos(u*6.28*(1+i%2*.5)+i)];
+for(let i=1;i<6;i++){const q=Q(i,t);dot(c,q[0],q[1],7,'#555')}
+for(let k=10;k>0;k--){const q=Q(0,t-k*.008);c.globalAlpha=.05*(11-k);dot(c,q[0],q[1],3,A)}c.globalAlpha=1;
+const q=Q(0,t),q2=Q(0,t+.012),vx=(q2[0]-q[0])*9,vy=(q2[1]-q[1])*9;dot(c,q[0],q[1],7,C);
+if(t>.1){bx(c,q[0]-16,q[1]-16,32,32,A,'TRACK ID 03');ln(c,q,[q[0]+vx,q[1]+vy],A,2);tx(c,'MOTION VECTOR',q[0]+vx+4,q[1]+vy,A)}
+tx(c,'TEMPORAL STATE: '+(t<.4?'OBSERVE':t<.75?'FOLLOW':'SEQUENCE'),20,345,C);if(t>.75)tx(c,'EVENT: MOVEMENT SEQUENCE',400,345,A)};
+const ik=(b,e,L)=>{const dx=e[0]-b[0],dy=e[1]-b[1],d=Math.min(Math.hypot(dx,dy),2*L-1),a=Math.atan2(dy,dx)-Math.acos(d/(2*L));return[b[0]+L*Math.cos(a),b[1]+L*Math.sin(a)]};
+SIM[6]=(c,t)=>{bg(c);ln(c,[0,300],[640,300],'#333');const b=[320,300],E0=[320,150],Ao=[200,288],Bo=[450,288],L=130;let E,g=0,ob;
+if(t<.2)E=E0;else if(t<.38)E=[lp(E0[0],Ao[0],ea((t-.2)/.18)),lp(E0[1],Ao[1],ea((t-.2)/.18))];else if(t<.45){E=Ao;g=ea((t-.38)/.07)}else if(t<.7){const u=ea((t-.45)/.25);E=[lp(Ao[0],Bo[0],u),lp(Ao[1],Bo[1],u)-Math.sin(u*3.14)*60];g=1}else if(t<.78){E=Bo;g=1-ea((t-.7)/.08)}else{const u=ea((t-.78)/.22);E=[lp(Bo[0],E0[0],u),lp(Bo[1],E0[1],u)]}
+ob=t<.45?Ao:t<.7?[E[0],E[1]+12]:Bo;c.fillStyle='#444';c.fillRect(ob[0]-12,ob[1]-12,24,24);
+const el=ik(b,E,L);ln(c,b,el,'#ddd',9);ln(c,el,E,'#ddd',7);dot(c,...b,10,'#888');dot(c,...el,6,'#888');ln(c,[E[0]-8+g*6,E[1]],[E[0]-8+g*6,E[1]+14],C,3);ln(c,[E[0]+8-g*6,E[1]],[E[0]+8-g*6,E[1]+14],C,3);
+dot(c,590,40,5,A);tx(c,'CAMERA',560,58,M);if(t<.2){ln(c,[590,40],ob,A,1,[3,4]);bx(c,ob[0]-18,ob[1]-18,36,36,A,'OBJECT: BOX')}
+if(t>.2&&t<.4){c.strokeStyle=A;c.setLineDash([4,4]);c.beginPath();c.moveTo(E0[0],E0[1]);c.quadraticCurveTo(230,160,Ao[0],Ao[1]);c.stroke();c.setLineDash([]);tx(c,'GRASP PLAN',230,150,A)}
+tx(c,'PERCEPTION → PLANNING → ACTION',20,345,t<.2?A:M);if(t>.78)tx(c,'COMPLETE',540,345,A)};
+
+const dom=$('#dom'),nt=$('#nt'),sc=$('#sc');let cur=0,man=null,vis=false,t0=0;
+function hud(t){const f=P[cur].fl;tx(cx,'▸ '+f[Math.min(5,Math.floor(t*6))].toUpperCase(),12,18,A);tx(cx,'F'+String(Math.floor(t*150)).padStart(3,'0'),590,18)}
+function loop(now){if(vis&&!document.hidden&&SIM[cur]){const t=man!=null?man:RM?.9:((now-t0)/6500)%1;cx.setTransform(2,0,0,2,0,0);SIM[cur](cx,t);hud(t);if(man==null)sc.value=t*1000}requestAnimationFrame(loop)}
+new IntersectionObserver(e=>vis=e[0].isIntersecting).observe($('.stage'));
+sc.oninput=()=>{man=sc.value/1000;$('#pl').textContent='Play'};$('#pl').onclick=()=>{if(man!=null){t0=performance.now()-man*6500;man=null}};
+const tabs=$('#tabs');P.forEach((p,i)=>{const b=document.createElement('button');b.innerHTML='<b>0'+(i+1)+'</b>'+p.t;b.onclick=()=>sel(i);tabs.append(b)});
+function sel(i){cur=i;man=null;t0=performance.now();[...tabs.children].forEach((b,j)=>b.classList.toggle('on',j==i));const p=P[i],d=i==3||i==4;
+cv.hidden=d;dom.hidden=!d;$('.ctl').style.display=d?'none':'flex';if(i==3)gnd();if(i==4)llm();
+$('#pt').textContent='0'+(i+1)+' — '+p.t;$('#pd').textContent=p.d;nt.textContent=p.n;$('#pf').innerHTML=p.fl.filter(x=>x!='—').map(x=>'<span>'+x+'</span>').join('→');
+$('#pb').innerHTML=Object.entries(p.x).map(([k,v],j)=>'<details'+(j<2?' open':'')+'><summary class="m">'+k+'</summary><p>'+v+'</p></details>').join('')}
+function gnd(){const V=[60,110,85,140],L='ABCD',o=['Chart title: text region.'];
+dom.innerHTML='<svg viewBox="0 0 360 190" style="width:100%;max-height:60%"><text class="rg" data-r="t" x="20" y="18" fill="#999" font-size="11">Illustrative series comparison</text>'+V.map((v,i)=>'<rect class="rg" data-r="'+i+'" x="'+(40+i*75)+'" y="'+(170-v)+'" width="48" height="'+v+'" fill="#555" stroke="#555"/><text x="'+(58+i*75)+'" y="184" fill="#888" font-size="10">'+L[i]+'</text>').join('')+'<line class="rg" data-r="a" x1="30" y1="170" x2="350" y2="170" stroke="#888" stroke-width="3"/></svg><div class="m" style="color:#888">Point at an element</div><div class="ch m" id="gc" style="color:#ececec"></div>';
+dom.onpointerover=e=>{const r=e.target.dataset&&e.target.dataset.r;if(r==null)return;let s;if(r=='t')s=['TEXT','TITLE REGION','CHART TITLE','Title describes a comparison of four illustrative series.'];else if(r=='a')s=['AXIS','BASELINE','SCALE REFERENCE','The baseline anchors every bar to a shared scale.'];else{const i=+r,rk=[...V].sort((a,b)=>b-a).indexOf(V[i])+1;s=['BAR','X '+e.target.getAttribute('x')+' / Y '+e.target.getAttribute('y'),'DATA SERIES '+L[i],'Series '+L[i]+' is ranked #'+rk+' of 4 by height.']}
+$('#gc').innerHTML=['VISUAL REGION DETECTED','OBJECT: '+s[0],'POSITION: '+s[1],'SEMANTIC ROLE: '+s[2],'GROUNDING: CONFIRMED','ANSWER: '+s[3]].map((x,i)=>'<div style="--i:'+i+'">'+x+'</div>').join('')}}
+function llm(){dom.innerHTML='<div class="m" style="color:#888">Prompt</div><div>Explain a lane boundary in two sentences.</div><div class="m" style="color:#888;margin-top:8px">Model response</div><div>A lane boundary is a painted line on the road. It was standardized worldwide in 1950, and every country paints it yellow.</div><div class="m" style="margin-top:8px;color:'+R+'">Evaluation — Hallucination detected: unsupported claims · Instruction following: ok · Response quality: low</div><div class="ev"><button>ACCEPT</button><button>REVISE</button><button>REJECT</button></div><div class="ch m" id="lo" style="color:#ececec"></div>';
+const O={ACCEPT:['Chosen: original response','Signal: noisy — contains unsupported claims','Taxonomy: hallucination left uncorrected'],REVISE:['Revised: "A lane boundary is a painted line marking where a lane starts and ends."','Pair: original vs revised → preference signal','Taxonomy: hallucination corrected'],REJECT:['Rejected: original response','Signal: negative example','Taxonomy: hallucination / unsupported claim']};
+dom.querySelectorAll('.ev button').forEach(b=>b.onclick=()=>{$('#lo').innerHTML=O[b.textContent].concat(['→ TRAINING SIGNAL GENERATED']).map((x,i)=>'<div style="--i:'+i+'">'+x+'</div>').join('')})}
+
+const hc=$('#hc'),hx=hc.getContext('2d'),mouse={x:-999,y:0};let HW,HH;const N=130,pa=[...Array(N)].map(()=>({p:Math.random(),y:Math.random(),s:.0006+Math.random()*.0008,ph:Math.random()*6}));
+function hr(){const d=Math.min(devicePixelRatio||1,2);HW=hc.clientWidth;HH=hc.clientHeight;hc.width=HW*d;hc.height=HH*d;hx.setTransform(d,0,0,d,0,0)}hr();addEventListener('resize',hr);
+const HS=['DATA','PERCEPTION','REPRESENTATION','REASONING','ACTION'];let hv=true;new IntersectionObserver(e=>hv=e[0].isIntersecting).observe($('#hero'));
+document.addEventListener('pointermove',e=>{const r=hc.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top});
+const fg=()=>getComputedStyle(document.documentElement).getPropertyValue('--fg').trim();
+function hf(){if(hv&&!document.hidden){const f=fg();hx.clearRect(0,0,HW,HH);hx.font='10px monospace';const rows=14,rh=HH/rows;
+for(let i=0;i<5;i++){const x=HW*(i+.5)/5;hx.strokeStyle='rgba(125,125,125,.14)';hx.beginPath();hx.moveTo(x,0);hx.lineTo(x,HH);hx.stroke();hx.fillStyle=Math.abs(mouse.x-x)<HW/10?'#f5c400':'#7d7d7d';hx.fillText(HS[i],x+6,28)}
+pa.forEach(q=>{if(!RM)q.p=(q.p+q.s)%1;const e=ea(q.p),y0=q.y*HH,sn=Math.round(y0/rh)*rh;let x=q.p*HW,y=lp(y0,sn,e)+Math.sin(q.ph+q.p*20)*(1-e)*26;const dx=x-mouse.x,dy=y-mouse.y,d=Math.hypot(dx,dy);if(d<110){x+=dx/d*(110-d)*.35;y+=dy/d*(110-d)*.35}hx.fillStyle=e>.8?'#f5c400':f;hx.globalAlpha=.25+.6*e;hx.fillRect(x,y,2+e*2,2+e*2)});hx.globalAlpha=1}requestAnimationFrame(hf)}
+
+const cm=$('#cm');Object.entries(CAP).forEach(([k,v])=>{const b=document.createElement('button');b.className='m';b.style.color='inherit';b.textContent=k;b.onclick=()=>{[...cm.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');$('#cd').textContent=v};cm.append(b)});
+const obs=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.15});document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+const SYS=`You are PORTFOLIO INTELLIGENCE, the assistant on Vaibhav's AI/ML portfolio. Answer ONLY from the facts below and never invent. If something is not covered, say exactly: I don't have enough verified information in the portfolio to answer that accurately. Be precise and short (2-5 sentences); adapt tone if asked (CTO, recruiter). When relevant, end with one link token like [[road]]. Valid ids: pose, identity, road, grounding, llm, video, robot, exp, design, cap.
+FACTS: Vaibhav has about 4 years in AI/ML (2021-2025, AI/ML data operations on Google-associated projects) plus visual design (Adobe Illustrator, logo systems, typography, 2D design, brand identity, art direction, visual semiotics). His work is human-in-the-loop: visual-data interpretation, high-precision annotation, structured data generation, quality control, model evaluation, error identification, resolving ambiguous cases, training-signal generation. He did NOT invent or train foundation models, build autonomous-driving systems, or create identity-verification technology. The portfolio animations are conceptual visualizations. No contact details, metrics or benchmark scores are documented.
+PROJECTS: pose = Embody Joint (human pose estimation: joints, skeletons, occlusion). identity = Video Verifying Identity (tracking a person across frames, temporal consistency; conceptual, not a verification product). road = Road Mapping (turning road imagery into structured lanes, boundaries, intersections, traffic objects). grounding = Dense Structured Grounding (multimodal / vision-language: linking regions of charts, tables, infographics to grounded answers). llm = Model Evaluation & Alignment Workflows (instruction following, response quality, hallucination detection, preference evaluation, error taxonomy, human feedback to training signal). video = Video RL / Video Understanding (tracking a player across frames, motion, temporal context). robot = Embodied/Robotic AI (perception, planning, action data workflows; conceptual, not a deployed robot).
+Strongest domains: computer vision, multimodal AI, human-in-the-loop AI, model evaluation, video understanding, visual design. Most visually impressive: Road Mapping demo. Annotation vs model development: annotation and evaluation create and check the training signals; model development designs architectures and trains models, which is not claimed here.`;
+let sf=null,hist=[],bz=false;const log=$('#log');
+try{claude.use('sample').then(s=>{sf=s;if(!s)$('#as').textContent='OFFLINE'}).catch(()=>{})}catch(e){}
+function go(id){const i=P.findIndex(p=>p.id==id);if(i>=0){sel(i);$('#work').scrollIntoView()}else{const m={exp:'#exp',design:'#design',cap:'#cap'}[id];if(m)$(m).scrollIntoView()}$('#ai').classList.remove('open')}
+function render(el,txt){el.textContent='';txt.split(/\[\[(\w+)\]\]/).forEach((s,i)=>{if(i%2==0)el.append(document.createTextNode(s));else{const b=document.createElement('button'),p=P.find(p=>p.id==s);b.textContent='VIEW '+(p?p.t.toUpperCase():s.toUpperCase());b.onclick=()=>go(s);el.append(b)}})}
+async function ask(q){if(!q||bz)return;bz=true;const u=document.createElement('p');u.className='u';u.textContent=q;log.append(u);const a=document.createElement('p');a.textContent='…';log.append(a);log.scrollTop=1e9;
+if(!sf){a.textContent='The assistant works when this page is opened from claude.ai.';bz=false;return}
+try{const r=await sf(hist.slice(-6).concat([{role:'user',content:SYS+'\n\nVisitor question: '+q}]),{cache:false,modelTier:'quick',onText:o=>{render(a,o.text.replace(/\[\[\w*$/,''));log.scrollTop=1e9}});hist.push({role:'user',content:q},{role:'assistant',content:r.text});render(a,r.text)}catch(e){a.textContent=e&&e.code=='not_granted'?'Permission was not granted.':'Signal lost. Try again.'}bz=false}
+[['ASK ABOUT AI','What does Vaibhav do in AI, and does he build models?'],['ASK ABOUT COMPUTER VISION','Which projects involve computer vision?'],['ASK ABOUT EXPERIENCE','What did Vaibhav work on at Google?'],['ASK ABOUT DESIGN','Does he know design?'],['ASK ABOUT PROJECTS','Show me his most visually impressive project.']].forEach(([l,q])=>{const b=document.createElement('button');b.textContent=l;b.onclick=()=>ask(q);$('#sg').append(b)});
+const tg=()=>$('#ai').classList.toggle('open');$('#fab').onclick=tg;$('#oa').onclick=()=>{$('#ai').classList.add('open');$('#ti').focus()};
+const snd=()=>{const v=$('#ti').value.trim();$('#ti').value='';ask(v)};$('#ts').onclick=snd;$('#ti').onkeydown=e=>{if(e.key=='Enter')snd()};
+let kb='',fr=0,fps=0;addEventListener('keydown',e=>{if(e.target.tagName=='INPUT')return;kb=(kb+e.key.toLowerCase()).slice(-90);if(kb.endsWith('va12')||kb.endsWith('arrowuparrowuparrowdownarrowdownarrowleftarrowrightarrowleftarrowrightba'))document.body.classList.toggle('diag')});
+setInterval(()=>{fps=fr;fr=0;if(document.body.classList.contains('diag'))$('#dg').textContent='SYSTEM DIAGNOSTICS\nLAYERS: 7 simulations\nVIEWPORT: '+innerWidth+'x'+innerHeight+'\nASSISTANT: '+$('#as').textContent+'\nFPS: '+fps},1000);
+(function f(){fr++;requestAnimationFrame(f)})();
+sel(0);t0=performance.now();requestAnimationFrame(loop);requestAnimationFrame(hf);
+</script>
+</body></html>
